@@ -129,7 +129,7 @@ class SendgridTransportTest extends TestCase
 
 
         $getPersonalizations = \Closure::bind(function ($message) {
-            return $this->getPersonalizations($message);
+            return $this->setPersonalizations($message);
         }, $this->transport, SendgridTransport::class);
 
         $message = $this->getMessage();
@@ -193,7 +193,7 @@ class SendgridTransportTest extends TestCase
     public function testSetParameters()
     {
         $setParameters = \Closure::bind(function ($message, $data) {
-            return $this->setParameters($message, $data);
+            return $this->setMailParams($message, $data);
         }, $this->transport, SendgridTransport::class);
 
         $parameters = [
@@ -209,7 +209,7 @@ class SendgridTransportTest extends TestCase
     public function testSetPersonalizations()
     {
         $setParameters = \Closure::bind(function ($message, $data) {
-            return $this->setParameters($message, $data);
+            return $this->setMailParams($message, $data);
         }, $this->transport, SendgridTransport::class);
 
         $personalizations = [
