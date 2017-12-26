@@ -74,13 +74,22 @@ return [
 ```
 MAIL_DRIVER=sendgrid
 SENDGRID_API_KEY='YOUR_SENDGRID_API_KEY'
+SENDGRID_SANDBOX_MODE=false
 ```
 
 config/services.php (In using lumen, require creating config directory and file.)
 ```
-    'sendgrid' => [
-        'api_key' => env('SENDGRID_API_KEY'),
+    'sendgrid'  => [
+        'api_key'      => env('SENDGRID_API_KEY', ''),
+        'sandbox_mode' => env('SENDGRID_SANDBOX_MODE', false),
     ],
+```
+
+
+config/mail.php
+```
+    'test_mode' => env('MAIL_TEST_MODE', false),
+    'test_address' => env('MAIL_TEST_ADDRESS', 'testing@basharsoft.com'),
 ```
 
 ## Request Body Parameters
