@@ -150,36 +150,6 @@ https://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/index.html#-Request-Body
 
 ```php
 <?
-use Sichikawa\LaravelSendgridDriver\SendGrid;
-
-class SendGridSample extends Mailable
-{
-    use SendGrid;
-    
-    public function build()
-    {
-        return $this
-            ->view('template name')
-            ->subject('subject')
-            ->from('from@example.com')
-            ->to(['to@example.com'])
-            ->sendgrid([
-                'personalizations' => [
-                    [
-                        'substitutions' => [
-                            ':myname' => 's-ichikawa',
-                        ],
-                    ],
-                ],
-            ]);
-    }
-}
-```
-
-## MailParams Usage
-
-```php
-<?
 use Sichikawa\LaravelSendgridDriver\Helpers\MailExtender;
 use Sichikawa\LaravelSendgridDriver\Helpers\MailParams;
 
@@ -202,7 +172,7 @@ class SendGridSample extends Mailable
             ->subject('subject')
             ->from('from@example.com')
             ->to(['to@example.com'])
-            ->sendgrid($mailParams);
+            ->withParams($mailParams);
 
     }
 }

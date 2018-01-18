@@ -8,13 +8,13 @@ trait MailExtender
 {
 
     /**
-     * Embed the SendGrid params to the email message
+     * Embed the mail params object to the email message
      * 
      * @param null|array $params
      * 
      * @return $this
      */
-    public function sendgrid($params)
+    public function withParams(MailParams $params)
     {
         $this->withSwiftMessage(function (Swift_Message $message) use ($params) {
             $message->embed(new Swift_Image($params));
