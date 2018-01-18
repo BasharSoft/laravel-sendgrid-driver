@@ -276,11 +276,11 @@ class SendgridTransport extends Transport
         foreach ($message->getChildren() as $child) {
             if (
                 $child instanceof Swift_Image &&
-                $child->getBody() instanceof \Sichikawa\LaravelSendgridDriver\MailParams
+                $child->getBody() instanceof MailParams
             ) {
                 $childBody = $child->getBody();
 
-                if ($childBody instanceof \Sichikawa\LaravelSendgridDriver\MailParams) {
+                if ($childBody instanceof MailParams) {
                     if (null != $sendAt = $childBody->getSendAt()) {
                         $mail->setSendAt($sendAt);
 

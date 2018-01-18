@@ -1,6 +1,9 @@
 <?php
 namespace Sichikawa\LaravelSendgridDriver\Helpers;
 
+use Swift_Image;
+use Swift_Message;
+
 trait MailExtender
 {
 
