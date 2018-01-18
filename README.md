@@ -29,13 +29,6 @@ or installed with composer
 $ composer require s-ichikawa/laravel-sendgrid-driver
 ```
 
-Add the sendgrid service provider in config/app.php:
-```php
-'providers' => [
-    Sichikawa\LaravelSendgridDriver\SendgridTransportServiceProvider::class
-];
-```
-
 # Install (Lumen)
 
 Add the package to your composer.json and run composer update.
