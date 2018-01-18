@@ -68,6 +68,10 @@ return [
 MAIL_DRIVER=sendgrid
 SENDGRID_API_KEY='YOUR_SENDGRID_API_KEY'
 SENDGRID_SANDBOX_MODE=false
+
+MAIL_TESTING_IS_ENABLED=false
+MAIL_TESTING_ADDRESS=testing@basharsoft.com
+
 ```
 
 config/services.php (In using lumen, require creating config directory and file.)
@@ -82,8 +86,8 @@ config/services.php (In using lumen, require creating config directory and file.
 config/mail.php
 ```
     'testing'       => [
-        'is_enabled' => env('MAIL_TEST_MODE', false),
-        'address'    => env('MAIL_TEST_ADDRESS', 'testing@basharsoft.com')
+        'is_enabled' => env('MAIL_TESTING_IS_ENABLED', false),
+        'address'    => env('MAIL_TESTING_ADDRESS', 'testing@basharsoft.com')
     ]
 ```
 
