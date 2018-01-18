@@ -176,3 +176,35 @@ class SendGridSample extends Mailable
 }
 ```
 
+## MailParams Usage
+
+```php
+<?
+use Sichikawa\LaravelSendgridDriver\Helpers\MailExtender;
+use Sichikawa\LaravelSendgridDriver\Helpers\MailParams;
+
+class SendGridSample extends Mailable
+{
+    use MailExtender;
+    
+    public function build()
+    {
+
+        $mailParams = new MailParams();
+        $mailParams
+            ->setSendAt(time())
+            ->addCategory('Test')
+            ->addCategory('Test2')
+        ;
+
+        return $this
+            ->view('template name')
+            ->subject('subject')
+            ->from('from@example.com')
+            ->to(['to@example.com'])
+            ->sendgrid($mailParams);
+
+    }
+}
+```
+
