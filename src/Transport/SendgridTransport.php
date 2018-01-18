@@ -326,7 +326,7 @@ class SendgridTransport extends Transport
      */
     protected function setRecipients(Personalization $personalization, Swift_Mime_SimpleMessage $message)
     {
-        $isInTestMode = (bool) $this->mailConfig->get('test_mode', false);
+        $isInTestMode = (bool) $this->mailConfig->get('testing.is_enabled', false);
         $recipients   = [];
 
         if (!$isInTestMode) {
@@ -358,7 +358,7 @@ class SendgridTransport extends Transport
                 }
             }
         } else {
-            $testingAddress = $this->mailConfig->get('test_address');
+            $testingAddress = $this->mailConfig->get('testing.address');
 
             $personalization->addTo(new Email('Testing Team', $testingAddress));
             ++$this->numberOfRecipients;

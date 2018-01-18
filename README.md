@@ -81,8 +81,10 @@ config/services.php (In using lumen, require creating config directory and file.
 
 config/mail.php
 ```
-    'test_mode' => env('MAIL_TEST_MODE', false),
-    'test_address' => env('MAIL_TEST_ADDRESS', 'testing@basharsoft.com'),
+    'testing'       => [
+        'is_enabled' => env('MAIL_TEST_MODE', false),
+        'address'    => env('MAIL_TEST_ADDRESS', 'testing@basharsoft.com')
+    ]
 ```
 
 ## Request Body Parameters
