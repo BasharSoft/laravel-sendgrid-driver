@@ -3,7 +3,10 @@ namespace Sichikawa\LaravelSendgridDriver\Providers;
 
 use Illuminate\Mail\TransportManager;
 use Illuminate\Support\ServiceProvider;
+use SendGrid;
+use Sichikawa\LaravelSendgridDriver\Contracts\EmailCheckerContract;
 use Sichikawa\LaravelSendgridDriver\Transport\SendgridTransport;
+use function app;
 
 class SendgridTransportServiceProvider extends ServiceProvider
 {
@@ -28,9 +31,11 @@ class SendgridTransportServiceProvider extends ServiceProvider
 
             $sendgridApiKey = $sendgridConfig['api_key'];
 
-            $sendgrid = new \SendGrid($sendgridApiKey);
+            $sendgrid = new SendGrid($sendgridApiKey);
 
-            return new SendgridTransport($sendgrid, $sendgridConfig, $mailConfig);
+            $emailChecker = app()->make(EmailCheckerContract::class);
+
+            return new SendgridTransport($sendgrid, $emailChecker, $sendgridConfig, $mailConfig);
         });
     }
 }

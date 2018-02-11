@@ -14,6 +14,7 @@ use SendGrid\MailSettings;
 use SendGrid\Personalization;
 use SendGrid\ReplyTo;
 use SendGrid\SandBoxMode;
+use Sichikawa\LaravelSendgridDriver\Contracts\EmailCheckerContract;
 use Sichikawa\LaravelSendgridDriver\Helpers\MailParams;
 use Swift_Attachment;
 use Swift_Image;
@@ -29,6 +30,20 @@ class SendgridTransport extends Transport
     protected $numberOfRecipients = 0;
 
     /**
+     * The SendGrid client object
+     * 
+     * @var SendGrid
+     */
+    protected $sendgridClient;
+
+    /**
+     * The email checker service
+     * 
+     * @var EmailCheckerContract
+     */
+    protected $emailChecker;
+
+    /**
      * The Sendgrid config array
      * 
      * @var Collection 
@@ -42,16 +57,10 @@ class SendgridTransport extends Transport
      */
     protected $mailConfig;
 
-    /**
-     * The SendGrid client object
-     * 
-     * @var SendGrid
-     */
-    protected $sendgridClient;
-
-    public function __construct($sendgridClient, $sendgridConfig, $mailConfig)
+    public function __construct(SendGrid $sendgridClient, EmailCheckerContract $emailChecker, $sendgridConfig, $mailConfig)
     {
         $this->sendgridClient = $sendgridClient;
+        $this->emailChecker   = $emailChecker;
         $this->sendgridConfig = collect($sendgridConfig);
         $this->mailConfig     = collect($mailConfig);
     }
@@ -365,8 +374,15 @@ class SendgridTransport extends Transport
         }
     }
 
+    /**
+     * Check whether an email address is valid or not
+     * 
+     * @param string $emailAddress  The email address
+     * 
+     * @return boolean
+     */
     public function isValidEmail($emailAddress)
     {
-        
+        return $this->emailChecker->isValidEmail($emailAddress);
     }
 }
