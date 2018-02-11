@@ -340,7 +340,7 @@ class SendgridTransport extends Transport
 
         if (!$isInTestMode) {
             foreach ($message->getTo() as $email => $name) {
-                if (!in_array($email, $recipients)) {
+                if (!in_array($email, $recipients) && $this->isValidEmail($email)) {
                     $personalization->addTo(new Email($name, $email));
                     ++$this->numberOfRecipients;
                     $recipients[] = $email;
@@ -349,7 +349,7 @@ class SendgridTransport extends Transport
 
             if ($cc = $message->getCc()) {
                 foreach ($cc as $email => $name) {
-                    if (!in_array($email, $recipients)) {
+                    if (!in_array($email, $recipients) && $this->isValidEmail($email)) {
                         $personalization->addCc(new Email($name, $email));
                         ++$this->numberOfRecipients;
                         $recipients[] = $email;
@@ -359,7 +359,7 @@ class SendgridTransport extends Transport
 
             if ($bcc = $message->getBcc()) {
                 foreach ($bcc as $email => $name) {
-                    if (!in_array($email, $recipients)) {
+                    if (!in_array($email, $recipients) && $this->isValidEmail($email)) {
                         $personalization->addBcc(new Email($name, $email));
                         ++$this->numberOfRecipients;
                         $recipients[] = $email;
@@ -383,6 +383,6 @@ class SendgridTransport extends Transport
      */
     public function isValidEmail($emailAddress)
     {
-        return $this->emailChecker->isValidEmail($emailAddress);
+        $this->emailChecker->isValidEmail($emailAddress);
     }
 }

@@ -15,8 +15,6 @@ class EmailCheckerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(
-            EmailCheckerContract::class, EmailChecker::class
-        );
+        $this->app->bind(EmailCheckerContract::class, EmailChecker::class);
     }
 }
