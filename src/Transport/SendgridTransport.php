@@ -364,4 +364,9 @@ class SendgridTransport extends Transport
             ++$this->numberOfRecipients;
         }
     }
+
+    public function isValidEmail($emailAddress)
+    {
+        
+    }
 }

@@ -38,7 +38,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Sichikawa\\LaravelSendgridDriver\\Providers\\SendgridTransportServiceProvider"
+                "Sichikawa\\LaravelSendgridDriver\\Providers\\MailServiceProvider"
             ]
         }
     }
