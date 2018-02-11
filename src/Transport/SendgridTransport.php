@@ -383,6 +383,6 @@ class SendgridTransport extends Transport
      */
     public function isValidEmail($emailAddress)
     {
-        $this->emailChecker->isValidEmail($emailAddress);
+        return $this->emailChecker->isValidEmail($emailAddress);
     }
 }
