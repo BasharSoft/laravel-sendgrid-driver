@@ -61,8 +61,8 @@ class SendgridTransport extends Transport
     {
         $this->sendgridClient = $sendgridClient;
         $this->emailChecker   = $emailChecker;
-        $this->sendgridConfig = collect($sendgridConfig);
-        $this->mailConfig     = collect($mailConfig);
+        $this->sendgridConfig = $sendgridConfig;
+        $this->mailConfig     = $mailConfig;
     }
 
     /**
@@ -175,7 +175,7 @@ class SendgridTransport extends Transport
                 break;
             }
         } else {
-            $defaultFrom = $this->mailConfig->get('from');
+            $defaultFrom = array_get($this->mailConfig, 'from');
             $fromEmail   = new Email($defaultFrom['name'], $defaultFrom['address']);
         }
 
@@ -317,7 +317,7 @@ class SendgridTransport extends Transport
 
         // Set the SandBox mode
         $sandboxMode     = new SandBoxMode();
-        $isInSandboxMode = (bool) $this->sendgridConfig->get('sandbox_mode', false);
+        $isInSandboxMode = (bool) array_get($this->sendgridConfig, 'sandbox_mode', false);
         $sandboxMode->setEnable($isInSandboxMode);
 
         $settings->setSandboxMode($sandboxMode);
@@ -335,7 +335,7 @@ class SendgridTransport extends Transport
      */
     protected function setRecipients(Personalization $personalization, Swift_Mime_SimpleMessage $message)
     {
-        $isInTestMode = (bool) $this->mailConfig->get('testing.is_enabled', false);
+        $isInTestMode = (bool) array_get($this->mailConfig, 'testing.is_enabled', false);
         $recipients   = [];
 
         if (!$isInTestMode) {
@@ -367,7 +367,7 @@ class SendgridTransport extends Transport
                 }
             }
         } else {
-            $testingAddress = $this->mailConfig->get('testing.address');
+            $testingAddress = array_get($this->mailConfig, 'testing.address');
 
             $personalization->addTo(new Email('Testing Team', $testingAddress));
             ++$this->numberOfRecipients;
