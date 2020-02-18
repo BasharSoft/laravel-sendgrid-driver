@@ -1,5 +1,5 @@
 {
-    "name": "s-ichikawa/laravel-sendgrid-driver",
+    "name": "basharsoft/laravel-sendgrid-driver",
     "description": "This library adds a 'sendgrid' mail driver to Laravel.",
     "keywords": ["laravel", "sendgrid"],
     "license": "MIT",
@@ -30,10 +30,10 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/s-ichikawa/laravel-sendgrid-driver/issues"
+        "issues": "https://github.com/basharsoft/laravel-sendgrid-driver/issues"
     },
     "suggest": {
-        "s-ichikawa/sendgrid-api-builder": "support to build json for sendgrid api"
+        "basharsoft/sendgrid-api-builder": "support to build json for sendgrid api"
     },
     "extra": {
         "laravel": {
