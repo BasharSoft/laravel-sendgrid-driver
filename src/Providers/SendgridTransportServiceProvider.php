@@ -1,7 +1,7 @@
 <?php
 namespace Sichikawa\LaravelSendgridDriver\Providers;
 
-use Illuminate\Mail\TransportManager;
+use Illuminate\Mail\MailManager;
 use Illuminate\Support\ServiceProvider;
 use SendGrid;
 use Sichikawa\LaravelSendgridDriver\Contracts\EmailCheckerContract;
@@ -18,12 +18,12 @@ class SendgridTransportServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->afterResolving(TransportManager::class, function(TransportManager $manager) {
+        $this->app->afterResolving(MailManager::class, function(MailManager $manager) {
             $this->extendTransportManager($manager);
         });
     }
 
-    public function extendTransportManager(TransportManager $manager)
+    public function extendTransportManager(MailManager $manager)
     {
         $manager->extend('sendgrid', function() {
             $sendgridConfig = $this->app['config']->get('services.sendgrid', []);
