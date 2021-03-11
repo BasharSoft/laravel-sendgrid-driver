@@ -24,6 +24,13 @@ class MailParams
     protected $categories = [];
 
     /**
+     * Custom Args is a data that you want to pass with the email, and want to recieve it with the email status
+     *
+     * @var string[]
+     */
+    protected $customArgs = [];
+
+    /**
      * Get the send at value
      * 
      * @return integer|null
@@ -89,5 +96,32 @@ class MailParams
         }
 
         return $this;
+    }
+
+    /**
+     * Add a new custom argument to the list
+     *
+     * @param string $customArg  Custom argument
+     * @param string $value      Custom argument value
+     *
+     * @return $this
+     */
+    public function addCustomArg($customArg, $value)
+    {
+        if (!empty($customArg) && !isset($this->customArgs[$customArg])) {
+            $this->customArgs[$customArg] = $value;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the CustomArgs list
+     *
+     * @return string[]
+     */
+    public function getCustomArgs()
+    {
+        return $this->customArgs;
     }
 }
