@@ -301,6 +301,11 @@ class SendgridTransport extends Transport
                     foreach (array_unique($childBody->getCategories()) as $category) {
                         $mail->addCategory($category);
                     }
+
+                    // Handle Custom arguments
+                    foreach ($childBody->getCustomArgs() as $arg => $value) {
+                        $mail->addCustomArg($arg, $value);
+                    }
                 }
             }
         }
